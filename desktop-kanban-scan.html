@@ -17,6 +17,7 @@
             var optaskUri;
             var projUri;
             var zendeskUri
+            var trelloUri;
             var uriInputPrompt = prompt("Scan Kanban Card Here:", "");
 
             if (uriInputPrompt == null || uriInputPrompt == "") {
@@ -29,6 +30,7 @@
                 docuUri = /^workfront...DOCU.ID./.test(uriValue);
                 optaskUri = /^workfront...OPTASK.ID./.test(uriValue);
                 zendeskUri = /^zendesk...agent.tickets./.test(uriValue);
+                trelloUri = /^zendesk...agent.tickets./.test(uriValue);
             }
 
             /* example scan input: workfront://PROJ?ID=564f71b200d4b8f4a393335ed5a816c1   */
@@ -47,6 +49,9 @@
             }
             if (zendeskUri == true) {
                 window.open(uriValue.replace(/^zendesk...agent.tickets./, "https://samaritanspurse.zendesk.com/agent/tickets/"));
+            }
+            if (trelloUri == true) {
+                window.open(uriValue.replace(/^trello...x-callback-url.showCard.shortlink./, "https://trello.com/c/"));
             }
             
         }
