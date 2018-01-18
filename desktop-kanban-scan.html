@@ -23,7 +23,7 @@
             var zendeskUri
             var trelloUri;
             var scanInput = document.getElementById("scanInput").value;
-            window.name = "scannerWindow";
+            var scannerWindow = window.name;
 
             if (scanInput != null || scanInput != "") {
 
@@ -39,9 +39,9 @@
             /* example scan input: workfront://PROJ?ID=564f71b200d4b8f4a393335ed5a816c1   */
 
             if (projUri == true) {
-               win2 = window.open(uriValue.replace(/^workfront...PROJ.ID./, "https://samaritan.my.workfront.com/project/view?ID="));
+               var win2 = window.open(uriValue.replace(/^workfront...PROJ.ID./, "https://samaritan.my.workfront.com/project/view?ID="));
                win2.blur();
-               window.focus();
+               scannerWindow.focus();
 
             }
             if (taskUri == true) {
