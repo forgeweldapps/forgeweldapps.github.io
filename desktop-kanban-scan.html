@@ -23,7 +23,7 @@
             var zendeskUri
             var trelloUri;
             var scanInput = document.getElementById("scanInput").value;
-            var scannerWindow = window.name;
+            window.name = "scannerWindow";
 
             if (scanInput != null || scanInput != "") {
 
@@ -39,33 +39,34 @@
             /* example scan input: workfront://PROJ?ID=564f71b200d4b8f4a393335ed5a816c1   */
 
             if (projUri == true) {
-               var win2 = window.open(uriValue.replace(/^workfront...PROJ.ID./, "https://samaritan.my.workfront.com/project/view?ID="));
-               win2.blur();
-               scannerWindow.focus();
+                goto(uriValue.replace(/^workfront...PROJ.ID./, "https://samaritan.my.workfront.com/project/view?ID="));
 
             }
             if (taskUri == true) {
-                window.open(uriValue.replace(/^workfront...TASK.ID./, "https://samaritan.my.workfront.com/task/view?ID="));
+                goto(uriValue.replace(/^workfront...TASK.ID./, "https://samaritan.my.workfront.com/task/view?ID="));
 
             }
             if (docuUri == true) {
-                window.open(uriValue.replace(/^workfront...DOCU.ID./, "https://samaritan.my.workfront.com/document/view?ID="));
+                goto(uriValue.replace(/^workfront...DOCU.ID./, "https://samaritan.my.workfront.com/document/view?ID="));
 
             }
             if (optaskUri == true) {
-                window.open(uriValue.replace(/^workfront...OPTASK.ID./, "https://samaritan.my.workfront.com/issue/view?ID="));
-
+                goto(uriValue.replace(/^workfront...OPTASK.ID./, "https://samaritan.my.workfront.com/issue/view?ID="));
             }
             if (zendeskUri == true) {
-                window.open(uriValue.replace(/^zendesk...agent.tickets./, "https://samaritanspurse.zendesk.com/agent/tickets/"));
+                goto(uriValue.replace(/^zendesk...agent.tickets./, "https://samaritanspurse.zendesk.com/agent/tickets/"));
 
             }
             if (trelloUri == true) {
-                window.open(uriValue.replace(/^trello...x.callback.url.showCard.shortlink./, "https://trello.com/c/"));
+                goto(uriValue.replace(/^trello...x.callback.url.showCard.shortlink./, "https://trello.com/c/"));
 
             }
+        }
 
-            window.focus("scannerWindow");
+        function goto(url) {
+            var currentUrl = document.URL;
+            window.location.href = url;
+            window.open(currentUrl, "_blank");
         }
     </script>
 
