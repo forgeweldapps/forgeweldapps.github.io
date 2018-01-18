@@ -7,7 +7,7 @@
 
     <h2 id="helpHeader">scan card:</h2>
 
-    <form onsubmit="getURIandUpdatetext()" return false>
+    <form onsubmit="getURIandUpdatetext(); return false">
         <input id="scanInput" type="text" name="scanInput" autofocus>
     </form>
 
@@ -65,8 +65,8 @@
 
         function goto(url) {
             var currentUrl = document.URL;
-            window.location.href = url;
             window.open(currentUrl, "_blank");
+            window.location.href = url;
         }
     </script>
 
