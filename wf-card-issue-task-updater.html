@@ -9,7 +9,7 @@
 
     <p id="demo"></p>
 
-    <form onsubmit="getURIandUpdatetext(); return false">
+    <form onsubmit="event.preventDefault(); getURIandUpdatetext();">
         <input id="scanInput" type="text" name="scanInput" autofocus>
     </form>
 
