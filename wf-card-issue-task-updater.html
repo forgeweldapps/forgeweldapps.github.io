@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 
-<link rel="shortcut icon" type="image/png" href="https://sp.box.com/shared/static/fyibz7pa3nlorqtc8euvmm5uyo1aqw9e.png" />
+<link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNpi/P//PwMlgBEIQHQjEGujyYUA8RosbBi4CsT1IBNAeB2URuevwyKGwmeCmgajN6DxmbCIofDRDQjAwserhgXKYQbirVjCCCTmjU8NLBBxgR1Q2gOXApizdkMxMns3VCMzkjgmDQ3RfUg0PvY+NPUMDGhRg44PQjE2PpiGBeJRLN6zBmJ7JLmjUDEYnwXZCyfRbD5JJA0PRFYofQ6NzwoVg9HmaDQc3EZz/m08bBS1IH/IAfEdIH6OJRxAYpJIcsjs7UCcDkpF/EDMgRTfxIK/QPwDIMAABqE7oyKErAwAAAAASUVORK5CYII=" />
 
 <body>
 
     <h2 id="helpHeader">scan card:</h2>
 
+    <p id="demo"></p>
+
     <form onsubmit="getURIandUpdatetext(); return false">
         <input id="scanInput" type="text" name="scanInput" autofocus>
     </form>
 
-    <p id="printed-uri-value"></p>
+
 
     <script>
         function getURIandUpdatetext() {
@@ -30,19 +32,33 @@
             }
 
             if (taskUri == true) {
-                goto(uriValue.replace(/^workfront...TASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/TASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey);
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "https://cors.io/?"+(uriValue.replace(/^workfront...TASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/TASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), false);
+                xhttp.send();
+                document.getElementById("scanInput").value = "";
+                document.getElementById("scanInput").focus();
 
             }
+
             if (optaskUri == true) {
-                goto(uriValue.replace(/^workfront...OPTASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/OPTASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey);
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "https://cors.io/?"+(uriValue.replace(/^workfront...OPTASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/OPTASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), false);
+                xhttp.send();
+                document.getElementById("scanInput").value = "";
+                document.getElementById("scanInput").focus();
+
             }
 
-        }
-
-        function goto(url) {
-            var currentUrl = document.URL;
-            window.open(currentUrl, "_blank");
-            window.location.href = url;
         }
 
         function getParameterByName(name, url) {
