@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNpi/P//PwMlgBEIQHQjEGujyYUA8RosbBi4CsT1IBNAeB2URuevwyKGwmeCmgajN6DxmbCIofDRDQjAwserhgXKYQbirVjCCCTmjU8NLBBxgR1Q2gOXApizdkMxMns3VCMzkjgmDQ3RfUg0PvY+NPUMDGhRg44PQjE2PpiGBeJRLN6zBmJ7JLmjUDEYnwXZCyfRbD5JJA0PRFYofQ6NzwoVg9HmaDQc3EZz/m08bBS1IH/IAfEdIH6OJRxAYpJIcsjs7UCcDkpF/EDMgRTfxIK/QPwDIMAABqE7oyKErAwAAAAASUVORK5CYII=" />
+
+<body>
+
+    <h2 id="helpHeader">scan card:</h2>
+
+    <p id="demo"></p>
+
+    <form onsubmit="getURIandUpdatetext(); return false">
+        <input id="scanInput" type="text" name="scanInput" autofocus>
+    </form>
+
+
+
+    <script>
+        function getURIandUpdatetext() {
+            var uriValue;
+            var taskUri;
+            var optaskUri;
+            var apiKey = getParameterByName('apiKey')
+            var status = getParameterByName('status')
+            var scanInput = document.getElementById("scanInput").value;
+
+            if (scanInput != null || scanInput != "") {
+
+                uriValue = scanInput;
+                taskUri = /^workfront...TASK.ID./.test(uriValue);
+                optaskUri = /^workfront...OPTASK.ID./.test(uriValue);
+            }
+
+            if (taskUri == true) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "https://cors.io/?"+(uriValue.replace(/^workfront...TASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/TASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), false);
+                xhttp.send();
+                document.getElementById("scanInput").value = "";
+                document.getElementById("scanInput").focus();
+
+            }
+
+            if (optaskUri == true) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "https://cors.io/?"+(uriValue.replace(/^workfront...OPTASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/OPTASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), false);
+                xhttp.send();
+                document.getElementById("scanInput").value = "";
+                document.getElementById("scanInput").focus();
+
+            }
+
+        }
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+    </script>
+
+</body>
+
+</html>
