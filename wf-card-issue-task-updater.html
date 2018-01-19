@@ -42,6 +42,7 @@
                 xhttp.send();
                 document.getElementById("scanInput").value = "";
                 document.getElementById("scanInput").focus();
+                return false;
 
             };
 
@@ -56,9 +57,10 @@
                 xhttp.send();
                 document.getElementById("scanInput").value = "";
                 document.getElementById("scanInput").focus();
+                return false;
 
             };
-            return false;
+
         }
 
         function getParameterByName(name, url) {
