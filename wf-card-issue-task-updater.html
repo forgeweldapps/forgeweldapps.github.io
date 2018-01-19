@@ -10,19 +10,17 @@
 
     <p id="demo"></p>
 
-    <form onsubmit="event.preventDefault(); getURIandUpdatetext();">
+    <form onsubmit="return getURIandUpdatetext()">
         <input id="scanInput" type="text" name="scanInput" autofocus>
     </form>
-
-
 
     <script>
         function getURIandUpdatetext() {
             var uriValue;
             var taskUri;
             var optaskUri;
-            var apiKey = getParameterByName('apiKey')
-            var status = getParameterByName('status')
+            var apiKey = getParameterByName('apiKey');
+            var status = getParameterByName('status');
             var scanInput = document.getElementById("scanInput").value;
 
             if (scanInput != null || scanInput != "") {
@@ -30,7 +28,7 @@
                 uriValue = scanInput;
                 taskUri = /^workfront...TASK.ID./.test(uriValue);
                 optaskUri = /^workfront...OPTASK.ID./.test(uriValue);
-            }
+            };
 
             if (taskUri == true) {
                 var xhttp = new XMLHttpRequest();
@@ -44,7 +42,7 @@
                 document.getElementById("scanInput").value = "";
                 document.getElementById("scanInput").focus();
 
-            }
+            };
 
             if (optaskUri == true) {
                 var xhttp = new XMLHttpRequest();
@@ -58,7 +56,9 @@
                 document.getElementById("scanInput").value = "";
                 document.getElementById("scanInput").focus();
 
-            }
+            };
+
+            evt.preventDefault();
             return false;
         }
 
