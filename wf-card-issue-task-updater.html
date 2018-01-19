@@ -9,9 +9,11 @@
 
     <p id="demo"></p>
 
-    <form onsubmit="event.preventDefault(); getURIandUpdatetext();">
+    <form onsubmit="getURIandUpdatetext(); return false">
         <input id="scanInput" type="text" name="scanInput" autofocus>
     </form>
+
+
 
     <script>
         function getURIandUpdatetext() {
@@ -32,9 +34,7 @@
             if (taskUri == true) {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
-                    console.log("readystate:" + this.readyState + " Status:" + this.status)
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log(true)
                         document.getElementById("demo").innerHTML = this.responseText;
                     }
                 };
@@ -48,9 +48,7 @@
             if (optaskUri == true) {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
-                    console.log("readystate:" + this.readyState + " Status:" + this.status)
                     if (this.readyState == 4 && this.status == 200) {
-                        console.log(true)
                         document.getElementById("demo").innerHTML = this.responseText;
                     }
                 };
@@ -61,8 +59,7 @@
 
             }
 
-            return false
-            }
+        }
 
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
