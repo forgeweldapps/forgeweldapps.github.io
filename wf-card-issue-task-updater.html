@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="shortcut icon" type="image/png" href="https://sp.box.com/shared/static/fyibz7pa3nlorqtc8euvmm5uyo1aqw9e.png" />
+
+<body>
+
+    <h2 id="helpHeader">scan card:</h2>
+
+    <form onsubmit="getURIandUpdatetext(); return false">
+        <input id="scanInput" type="text" name="scanInput" autofocus>
+    </form>
+
+    <p id="printed-uri-value"></p>
+
+    <script>
+        function getURIandUpdatetext() {
+            var uriValue;
+            var taskUri;
+            var optaskUri;
+            var apiKey = getParameterByName('apiKey')
+            var status = getParameterByName('status')
+            var scanInput = document.getElementById("scanInput").value;
+
+            if (scanInput != null || scanInput != "") {
+
+                uriValue = scanInput;
+                taskUri = /^workfront...TASK.ID./.test(uriValue);
+                optaskUri = /^workfront...OPTASK.ID./.test(uriValue);
+            }
+
+            if (taskUri == true) {
+                goto(uriValue.replace(/^workfront...TASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/TASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey);
+
+            }
+            if (optaskUri == true) {
+                goto(uriValue.replace(/^workfront...OPTASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/OPTASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey);
+            }
+
+        }
+
+        function goto(url) {
+            var currentUrl = document.URL;
+            window.open(currentUrl, "_blank");
+            window.location.href = url;
+        }
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+    </script>
+
+</body>
+
+</html>
