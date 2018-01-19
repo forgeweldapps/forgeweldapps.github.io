@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 
-<link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNpi/P//PwMlgBEIQHQjEGujyYUA8RosbBi4CsT1IBNAeB2URuevwyKGwmeCmgajN6DxmbCIofDRDQjAwserhgXKYQbirVjCCCTmjU8NLBBxgR1Q2gOXApizdkMxMns3VCMzkjgmDQ3RfUg0PvY+NPUMDGhRg44PQjE2PpiGBeJRLN6zBmJ7JLmjUDEYnwXZCyfRbD5JJA0PRFYofQ6NzwoVg9HmaDQc3EZz/m08bBS1IH/IAfEdIH6OJRxAYpJIcsjs7UCcDkpF/EDMgRTfxIK/QPwDIMAABqE7oyKErAwAAAAASUVORK5CYII=" />
+<link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANxJREFUeNpi/P//PwMlgBEIQHQjEGujyYUA8RosbBi4CsT1IBNAeB2URuevwyKGwmeCmgajN6DxmbCIofDRDQjAwserhgXKYQbirVjCCCTmjU8NLBBxgR1Q2gOXApizdkMxMns3VCMzkjgmDQ3RfUg0PvY+NPUMDGhRg44PQjE2PpiGBeJRLN6zBmJ7JLmjUDEYnwXZCyfRbD5JJA0PRFYofQ6NzwoVg9HmaDQc3EZz/m08bBS1IH/IAfEdIH6OJRxAYpJIcsjs7UCcDkpF/EDMgRTfxIK/QPwDIMAABqE7oyKErAwAAAAASUVORK5CYII="
+/>
 
 <body>
 
@@ -38,7 +39,7 @@
                         document.getElementById("demo").innerHTML = this.responseText;
                     }
                 };
-                xhttp.open("GET",(uriValue.replace(/^workfront...TASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/TASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), false);
+                xhttp.open("GET", (uriValue.replace(/^workfront...TASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/TASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), false);
                 xhttp.send();
                 document.getElementById("scanInput").value = "";
                 document.getElementById("scanInput").focus();
@@ -52,13 +53,13 @@
                         document.getElementById("demo").innerHTML = this.responseText;
                     }
                 };
-                xhttp.open("GET",(uriValue.replace(/^workfront...OPTASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/OPTASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), false);
+                xhttp.open("GET", (uriValue.replace(/^workfront...OPTASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/OPTASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), false);
                 xhttp.send();
                 document.getElementById("scanInput").value = "";
                 document.getElementById("scanInput").focus();
 
             }
-
+            return false;
         }
 
         function getParameterByName(name, url) {
