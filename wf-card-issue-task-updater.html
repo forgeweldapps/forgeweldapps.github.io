@@ -37,7 +37,7 @@
                         document.getElementById("demo").innerHTML = this.responseText;
                     };
                 };
-                xhttp.open("GET", (uriValue.replace(/^workfront...TASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/TASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), true);
+                xhttp.open("GET","https://cors.io?"+(uriValue.replace(/^workfront...TASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/TASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), true);
                 xhttp.send();
                 document.getElementById("scanInput").value = "";
                 document.getElementById("scanInput").focus();
@@ -51,7 +51,7 @@
                         document.getElementById("demo").innerHTML = this.responseText;
                     }
                 };
-                xhttp.open("GET", (uriValue.replace(/^workfront...OPTASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/OPTASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), true);
+                xhttp.open("GET","https://cors.io?"+(uriValue.replace(/^workfront...OPTASK.ID./, "https://samaritan.attask-ondemand.com/attask/api/v5.0/OPTASK?ID=") + "&method=put&status=" + status + "&apiKey=" + apiKey), true);
                 xhttp.send();
                 document.getElementById("scanInput").value = "";
                 document.getElementById("scanInput").focus();
