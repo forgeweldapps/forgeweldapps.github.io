@@ -10,11 +10,10 @@
 
 <body>
 
-    <h2 id="helpHeader">scan card:</h2>
-
     <form onsubmit="getURIandUpdatetext(); return false">
-        <input id="scanInput" type="text" name="scanInput" autofocus>
-    </form>
+            <input id="scanInput" type="text" class="question" name="scanInput" required autocomplete="off" autofocus />
+            <label for="scanInput"><span>scan here...</span></label>
+          </form>
 
     <p id="printed-uri-value"></p>
 
@@ -73,6 +72,21 @@
             window.location.href = url;
             window.open(currentUrl, "_blank");
         }
+
+        var input = document.querySelector('.search-form');
+        var search = document.querySelector('input')
+        var button = document.querySelector('button');
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            input.classList.toggle('active');
+        })
+        search.addEventListener('focus', function () {
+            input.classList.add('focus');
+        })
+
+        search.addEventListener('blur', function () {
+            search.value.length != 0 ? input.classList.add('focus') : input.classList.remove('focus');
+        })
     </script>
 
 </body>

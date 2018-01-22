@@ -9,13 +9,14 @@
 />
 
 <body>
-
-    <h2 id="helpHeader">scan card:</h2>
-
+    
     <p id="demo"></p>
 
     <form onsubmit="getURIandUpdatetext(); return false">
-        <input id="scanInput" type="text" name="scanInput" autofocus>
+        <input id="scanInput" type="text" class="question" name="scanInput" required autocomplete="off" autofocus />
+        <label for="scanInput">
+            <span>scan here...</span>
+        </label>
     </form>
 
     <script>
