@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>Create Cards From Anything in Workfront!</h1>
+
+    <script type="text/javascript">
+        
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            var referenceNumber = getParameterByName('referenceNumber')
+            var GUID = getParameterByName('GUID')
+            var name = getParameterByName('name')
+            var objCode = getParameterByName('objCode')
+            var printerIP = getParameterByName('printerIP')
+
+            document.write(referenceNumber);
+            document.write("<br>");
+            document.write(name);
+            document.write("<br>");
+            document.write(GUID);
+            document.write("<br>");
+            document.write(objCode);
+            document.write("<br>");
+            document.write(printerIP);
+            document.write("<br>");
+        
+            var ZPL_Card = "^XA~TA000~JSN^LT0^MNW^MTD^PON^PMN^LH0,0^JMA^PR6,6~SD15^JUS^LRN^CI0^XZ^XA^MMT^PW812^LL0508^LS0^FO125,50^A0N,40,40^FB560,10,0,L,0^FD" + name + "^FS^FO125,370^A0N,40,40^FD" + referenceNumber + "^FS^FT500,380^BQN,2,4^FH^FDLA," + "workfront://" + objCode + "?ID=" + GUID + "^FS^FT100,428^A0N,39,38^FH^PQ1,0,1,Y^XZ";
+            
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                }
+            });
+            xhr.open("POST", "http://" + printerIP + ":9100/");
+            xhr.send(ZPL_Card);
+            window.onload = window.setTimeout(window.close, 3000);            
+    </script>
+</body>
+
+</html>
